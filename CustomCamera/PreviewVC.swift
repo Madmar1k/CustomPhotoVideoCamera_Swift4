@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AVFoundation
+import AVKit
 import Photos
 
 class PreviewVC: UIViewController {

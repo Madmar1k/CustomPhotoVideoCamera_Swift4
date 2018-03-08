@@ -17,11 +17,16 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getImages()
-        // Do any additional setup after loading the view.
+        getPhotosAndVideos()
     }
 
+    
+    
     override func viewDidAppear(_ animated: Bool) {
+        requestAuthorization()
+    }
+    
+    fileprivate func requestAuthorization() {
         //request access to library
         let photos = PHPhotoLibrary.authorizationStatus()
         if photos == .notDetermined {
@@ -29,7 +34,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
                 if status == .authorized{
                     print("ACCESS GRANTED")
                     DispatchQueue.main.async {
-                        self.getImages()
+                        self.getPhotosAndVideos()
                     }
                 } else {
                     print("DENIED")
@@ -38,19 +43,25 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
-    func getImages() {
-        let assets = PHAsset.fetchAssets(with: PHAssetMediaType.image, options: nil)
-        assets.enumerateObjects({ (object, count, stop) in
+
+    //MARK: - Fetch photos and videos from library
+    fileprivate func getPhotosAndVideos(){
+        
+        let fetchOptions = PHFetchOptions()
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate",ascending: false)]
+        fetchOptions.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
+        let imagesAndVideos = PHAsset.fetchAssets(with: fetchOptions)
+        print(imagesAndVideos.count)
+        
+        imagesAndVideos.enumerateObjects { (object, count, stop) in
             self.images.append(object)
-        })
-        
-        //In order to get latest image first, we just reverse the array
-        self.images.reverse()
-        
-        // To show photos, I have taken a UICollectionView
+        }
         self.collectionView.reloadData()
     }
-
+    
+    
+    
+    //MARK: - Collection view delegate
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
