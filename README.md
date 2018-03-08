@@ -1,4 +1,6 @@
 # CustomPhotoVideoCamera_Swift4
+Pre-alpha version.
+
 Functions:
 1. Browse your photo gallery
 2. Shoot short videos
