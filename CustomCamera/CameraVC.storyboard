@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--CameraVC-->
+        <scene sceneID="lDi-VS-1xr">
+            <objects>
+                <viewController storyboardIdentifier="CameraID" id="UYs-tC-Muv" customClass="CameraVC" customModule="CustomCamera" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="40T-JO-vZf">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g64-YZ-hNt">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mEz-QP-SlI">
+                                <rect key="frame" x="8" y="20" width="386" height="2"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </progressView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="icons8-image" translatesAutoresizingMaskIntoConstraints="NO" id="I60-dW-1cJ">
+                                <rect key="frame" x="20" y="655" width="61" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQC-3q-XEY">
+                                <rect key="frame" x="171" y="611" width="72" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="TakePhoto"/>
+                                <connections>
+                                    <action selector="didTakePhoto:" destination="UYs-tC-Muv" eventType="touchUpInside" id="cHo-ga-Gb5"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6IA-2Q-zhN">
+                                <rect key="frame" x="172" y="685" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Start/Stop"/>
+                                <connections>
+                                    <action selector="shootButtonPressed:" destination="UYs-tC-Muv" eventType="touchUpInside" id="Yym-8Q-6tD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNe-Zu-JIr">
+                                <rect key="frame" x="347" y="686" width="47" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Toggle"/>
+                                <connections>
+                                    <action selector="toggleButtonPressed:" destination="UYs-tC-Muv" eventType="touchUpInside" id="TZa-5G-kxP"/>
+                                </connections>
+                            </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="XoA-vk-1v5">
+                                <rect key="frame" x="197" y="567" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tUa-xr-XVb">
+                                <rect key="frame" x="364" y="30" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Exit"/>
+                                <connections>
+                                    <action selector="closeButtonPressed:" destination="UYs-tC-Muv" eventType="touchUpInside" id="nuE-ej-xPg"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="g64-YZ-hNt" firstAttribute="trailing" secondItem="scQ-uq-eiK" secondAttribute="trailing" id="32B-pz-Xze"/>
+                            <constraint firstItem="g64-YZ-hNt" firstAttribute="bottom" secondItem="scQ-uq-eiK" secondAttribute="bottom" id="Edl-wz-L26"/>
+                            <constraint firstItem="g64-YZ-hNt" firstAttribute="leading" secondItem="scQ-uq-eiK" secondAttribute="leading" id="QHE-JK-kBC"/>
+                            <constraint firstItem="g64-YZ-hNt" firstAttribute="top" secondItem="40T-JO-vZf" secondAttribute="top" id="ppa-0b-n2f"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="scQ-uq-eiK"/>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="cameraView" destination="g64-YZ-hNt" id="MmP-Rk-3wQ"/>
+                        <outlet property="closeButton" destination="tUa-xr-XVb" id="U3V-Vh-woe"/>
+                        <outlet property="indicatorView" destination="XoA-vk-1v5" id="Tj3-eo-zaO"/>
+                        <outlet property="progressView" destination="mEz-QP-SlI" id="TJy-Ej-cZU"/>
+                        <outlet property="shootButton" destination="6IA-2Q-zhN" id="lL4-Fh-sd1"/>
+                        <outlet property="takePhotoButton" destination="zQC-3q-XEY" id="2fX-fe-Iol"/>
+                        <outlet property="takenImage" destination="I60-dW-1cJ" id="Zkv-w8-53D"/>
+                        <outlet property="toggleButton" destination="xNe-Zu-JIr" id="Wxc-Tt-ZSi"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zY4-sQ-rLp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="452.17391304347831" y="40.760869565217398"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icons8-image" width="40" height="40"/>
+    </resources>
+</document>

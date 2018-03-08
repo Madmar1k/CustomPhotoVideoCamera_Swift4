@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--PreviewVC-->
+        <scene sceneID="atI-rZ-kjM">
+            <objects>
+                <viewController storyboardIdentifier="PreviewVC" id="oza-ce-Oo6" customClass="PreviewVC" customModule="CustomCamera" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3RU-ve-7ha">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jVQ-DG-MPH" customClass="PlayerView" customModule="CustomCamera" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="va4-2c-z6a">
+                                <rect key="frame" x="16" y="48" width="343" height="2"/>
+                            </progressView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CaH-8g-Euo">
+                                <rect key="frame" x="20" y="617" width="335" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyd-WY-bHM">
+                                        <rect key="frame" x="0.0" y="0.0" width="34" height="30"/>
+                                        <state key="normal" title="Save"/>
+                                        <connections>
+                                            <action selector="saveAction" destination="oza-ce-Oo6" eventType="touchUpInside" id="wzd-UW-Xcg"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhX-LB-K4P">
+                                        <rect key="frame" x="142" y="0.0" width="30" height="30"/>
+                                        <state key="normal" title="Play"/>
+                                        <connections>
+                                            <action selector="playAction" destination="oza-ce-Oo6" eventType="touchUpInside" id="oja-R4-9qR"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGF-SH-Reg">
+                                        <rect key="frame" x="280" y="0.0" width="55" height="30"/>
+                                        <state key="normal" title="Remove"/>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ok-pa-jnp">
+                                <rect key="frame" x="320" y="20" width="39" height="30"/>
+                                <state key="normal" title="Close"/>
+                                <connections>
+                                    <action selector="dismissBtnAct:" destination="oza-ce-Oo6" eventType="touchUpInside" id="DNV-dp-b2F"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="XXw-lb-hCW">
+                                <rect key="frame" x="165" y="321.5" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="iOg-W4-352"/>
+                                    <constraint firstAttribute="height" constant="44" id="jTY-0j-tdy"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="va4-2c-z6a" firstAttribute="leading" secondItem="3RU-ve-7ha" secondAttribute="leadingMargin" id="3I7-rf-1yf"/>
+                            <constraint firstItem="CaH-8g-Euo" firstAttribute="leading" secondItem="kXs-c2-x9T" secondAttribute="leading" constant="20" id="Mng-2Z-xyw"/>
+                            <constraint firstItem="kXs-c2-x9T" firstAttribute="trailing" secondItem="7ok-pa-jnp" secondAttribute="trailing" constant="16" id="Omb-Qc-0jT"/>
+                            <constraint firstItem="jVQ-DG-MPH" firstAttribute="leading" secondItem="kXs-c2-x9T" secondAttribute="leading" id="QkD-i7-pOx"/>
+                            <constraint firstItem="va4-2c-z6a" firstAttribute="top" secondItem="kXs-c2-x9T" secondAttribute="top" constant="28" id="ZYU-ca-v3p"/>
+                            <constraint firstItem="kXs-c2-x9T" firstAttribute="trailing" secondItem="CaH-8g-Euo" secondAttribute="trailing" constant="20" id="bjr-fc-jGK"/>
+                            <constraint firstItem="XXw-lb-hCW" firstAttribute="centerX" secondItem="kXs-c2-x9T" secondAttribute="centerX" id="fWc-Wx-2y3"/>
+                            <constraint firstItem="jVQ-DG-MPH" firstAttribute="bottom" secondItem="kXs-c2-x9T" secondAttribute="bottom" id="kI2-8m-Hzp"/>
+                            <constraint firstItem="jVQ-DG-MPH" firstAttribute="top" secondItem="3RU-ve-7ha" secondAttribute="top" id="lE8-bq-FDM"/>
+                            <constraint firstItem="kXs-c2-x9T" firstAttribute="bottom" secondItem="CaH-8g-Euo" secondAttribute="bottom" constant="20" id="m1v-MC-R5B"/>
+                            <constraint firstItem="XXw-lb-hCW" firstAttribute="centerY" secondItem="kXs-c2-x9T" secondAttribute="centerY" id="mdt-2W-Jux"/>
+                            <constraint firstItem="va4-2c-z6a" firstAttribute="trailing" secondItem="3RU-ve-7ha" secondAttribute="trailingMargin" id="p03-Cd-989"/>
+                            <constraint firstItem="7ok-pa-jnp" firstAttribute="top" secondItem="kXs-c2-x9T" secondAttribute="top" id="qQ7-Ko-F0s"/>
+                            <constraint firstItem="jVQ-DG-MPH" firstAttribute="trailing" secondItem="kXs-c2-x9T" secondAttribute="trailing" id="x8m-yg-Z67"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kXs-c2-x9T"/>
+                    </view>
+                    <connections>
+                        <outlet property="closeButton" destination="7ok-pa-jnp" id="6RE-7n-20H"/>
+                        <outlet property="playButton" destination="FhX-LB-K4P" id="W6h-aM-fEA"/>
+                        <outlet property="playerStatusImg" destination="XXw-lb-hCW" id="OpT-44-5o9"/>
+                        <outlet property="playerView" destination="jVQ-DG-MPH" id="MlX-kI-gjU"/>
+                        <outlet property="progressView" destination="va4-2c-z6a" id="iVy-JH-NaZ"/>
+                        <outlet property="removeButton" destination="iGF-SH-Reg" id="ckR-9O-7Vb"/>
+                        <outlet property="saveButton" destination="gyd-WY-bHM" id="arF-iM-CIb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gHr-hr-RJ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="13.6" y="49.925037481259373"/>
+        </scene>
+    </scenes>
+</document>
