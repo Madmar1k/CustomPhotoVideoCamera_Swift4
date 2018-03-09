@@ -33,7 +33,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
     var videoClipsDevicePosition = [AVCaptureDevice.Position]()
     var videoClipsPath = [URL]()
     var videoClipsDuration = [Double]()
-    var stopBtnPrsd = true
+    var isStopButtonPressed = true
     var isClosed = false
     let screen = UIScreen.main.bounds
     var screenWidth : CGFloat = 0
@@ -159,7 +159,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
         videoClipsPath.append(outputFileURL)
         videoClipsDuration.append(output.recordedDuration.seconds)
         
-        if stopBtnPrsd || maxRecordDuration().seconds <= 1 {
+        if isStopButtonPressed || maxRecordDuration().seconds <= 1 {
             mergeVideoClips()
         }
         else {
@@ -178,7 +178,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
         var time: Double = 0.0
         
         stopCaptureTimer()
-        stopBtnPrsd = true
+        isStopButtonPressed = true
         recBtnConfigure(type: "loading")
         
         for duration in self.videoClipsDuration {
@@ -408,7 +408,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
     }
     
     fileprivate func updateRecordButtonTitle() {
-        if stopBtnPrsd == false {
+        if isStopButtonPressed == false {
             recBtnConfigure(type: "press")
         }
         else {
@@ -444,13 +444,14 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
         }
     }
     @IBAction func shootButtonPressed(_ sender: UIButton) {
-        stopBtnPrsd = !stopBtnPrsd
-        if stopBtnPrsd {
+        isStopButtonPressed = !isStopButtonPressed
+        if isStopButtonPressed {
             stopCaptureTimer()
             recBtnInteraction(isEnabled: false)
             movieFileOutput.stopRecording()
         }
         else {
+            FileManager.default.clearTmpDirectory()
             videoClipsPath.removeAll()
             videoClipsDevicePosition.removeAll()
             videoClipsDuration.removeAll()

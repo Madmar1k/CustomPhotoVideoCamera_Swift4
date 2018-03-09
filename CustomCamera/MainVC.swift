@@ -18,6 +18,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         getPhotosAndVideos()
+        collectionView.delegate = self
     }
 
     
@@ -48,7 +49,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     fileprivate func getPhotosAndVideos(){
         
         let fetchOptions = PHFetchOptions()
-        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate",ascending: false)]
+        fetchOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate",ascending: true)]
         fetchOptions.predicate = NSPredicate(format: "mediaType = %d || mediaType = %d", PHAssetMediaType.image.rawValue, PHAssetMediaType.video.rawValue)
         let imagesAndVideos = PHAsset.fetchAssets(with: fetchOptions)
         print(imagesAndVideos.count)
@@ -89,7 +90,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 1, left: 0, bottom: 10, right: 0)
+        return UIEdgeInsets(top: 1, left: 0, bottom: 3, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

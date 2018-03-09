@@ -23,7 +23,6 @@ class PreviewVC: UIViewController {
     
     
     @objc dynamic let player = AVPlayer()
-    var saved = false
     var alertView: UIAlertController?
     var progress: Float = 0.0
     
@@ -197,7 +196,6 @@ class PreviewVC: UIViewController {
         player.pause()
         player.replaceCurrentItem(with: nil)
         playerView.removeFromSuperview()
-        dismiss(animated: true, completion: nil)
     }
     
     //MARK: - IBActions
@@ -213,6 +211,9 @@ class PreviewVC: UIViewController {
     
     @IBAction func dismissBtnAct(_ sender: Any) {
         self.terminateView()
+        if let destinationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainVC") as? MainVC {
+            self.present(destinationVC, animated: false, completion: nil)
+        }
     }
 
 }
