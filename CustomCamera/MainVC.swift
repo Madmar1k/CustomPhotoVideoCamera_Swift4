@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
@@ -19,6 +19,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         super.viewDidLoad()
         getPhotosAndVideos()
         collectionView.delegate = self
+        collectionView.dataSource = self
     }
 
     
@@ -62,7 +63,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
     
     
     
-    //MARK: - Collection view delegate
+    //MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return images.count
     }
@@ -71,6 +72,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoCVC
         let asset = images[indexPath.row]
+                
         let manager = PHImageManager.default()
         if cell.tag != 0 {
             manager.cancelImageRequest(PHImageRequestID(cell.tag))
@@ -84,7 +86,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return cell
     }
     
-    
+    //MARK: - UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 2.0
     }
@@ -100,11 +102,11 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         var size : CGFloat
         switch UIDevice.current.orientation{
         case .portrait:
-            size = collectionView.frame.width / 3 - 1
+            size = collectionView.frame.width / 5 - 1
         case .landscapeLeft:
-            size = collectionView.frame.width / 5 - 1
+            size = collectionView.frame.width / 6 - 1
         case .landscapeRight:
-            size = collectionView.frame.width / 5 - 1
+            size = collectionView.frame.width / 6 - 1
         default:
             size = collectionView.frame.width / 2 - 1
         }
