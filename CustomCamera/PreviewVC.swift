@@ -199,7 +199,6 @@ class PreviewVC: UIViewController {
     }
     
     //MARK: - IBActions
-    
     @IBAction func playAction() {
         self.updatePlayBtn()
     }

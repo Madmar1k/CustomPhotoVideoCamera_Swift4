@@ -11,6 +11,7 @@ import UIKit
 class PhotoCVC: UICollectionViewCell {
     
     @IBOutlet weak var photoImageView: UIImageView!
+    @IBOutlet weak var videoImageView: UIImageView!
     
     
 }

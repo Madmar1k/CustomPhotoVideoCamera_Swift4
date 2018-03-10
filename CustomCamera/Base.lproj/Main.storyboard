@@ -19,23 +19,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Sdj-Vv-FKk">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="594"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="AO7-ng-tKj">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="uGc-lE-728" customClass="PhotoCVC" customModule="CustomCamera" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-image" translatesAutoresizingMaskIntoConstraints="NO" id="TcE-yn-US2">
-                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                </imageView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-camcorder_pro" translatesAutoresizingMaskIntoConstraints="NO" id="PCB-FP-OEx">
+                                                    <rect key="frame" x="3" y="5" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="bjf-UA-y3F"/>
+                                                        <constraint firstAttribute="width" constant="20" id="zZK-gn-Tbj"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                         </view>
@@ -45,9 +52,12 @@
                                             <constraint firstAttribute="trailing" secondItem="TcE-yn-US2" secondAttribute="trailing" id="9xc-zV-lnJ"/>
                                             <constraint firstAttribute="bottom" secondItem="TcE-yn-US2" secondAttribute="bottom" id="Luz-nA-RWK"/>
                                             <constraint firstItem="TcE-yn-US2" firstAttribute="top" secondItem="uGc-lE-728" secondAttribute="top" id="WS3-lf-b0W"/>
+                                            <constraint firstItem="PCB-FP-OEx" firstAttribute="top" secondItem="uGc-lE-728" secondAttribute="top" constant="5" id="ltR-Q6-QcE"/>
+                                            <constraint firstItem="PCB-FP-OEx" firstAttribute="leading" secondItem="uGc-lE-728" secondAttribute="leading" constant="3" id="x2J-t4-XtD"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="photoImageView" destination="TcE-yn-US2" id="tV2-AR-Twp"/>
+                                            <outlet property="videoImageView" destination="PCB-FP-OEx" id="sOX-UT-s08"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -56,23 +66,42 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="LGO-jW-Nw7"/>
                                 </connections>
                             </collectionView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pvc-ff-9SI">
+                                <rect key="frame" x="0.0" y="614" width="375" height="53"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yab-Ek-Rnd">
+                                        <rect key="frame" x="171" y="10.5" width="32" height="32"/>
+                                        <state key="normal" image="icons8-compact_camera"/>
+                                        <connections>
+                                            <segue destination="Fjh-qn-Lny" kind="show" id="pNU-vh-lvi"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.93725490570000003" green="0.93725490570000003" blue="0.95686274770000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="Yab-Ek-Rnd" firstAttribute="centerY" secondItem="pvc-ff-9SI" secondAttribute="centerY" id="MTl-XB-Vgt"/>
+                                    <constraint firstAttribute="height" constant="53" id="jqs-iV-OU0"/>
+                                    <constraint firstItem="Yab-Ek-Rnd" firstAttribute="centerX" secondItem="pvc-ff-9SI" secondAttribute="centerX" id="sph-Nd-jcs"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="pvc-ff-9SI" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="IDx-3e-fNF"/>
+                            <constraint firstItem="pvc-ff-9SI" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Lnw-fR-Wyu"/>
+                            <constraint firstItem="pvc-ff-9SI" firstAttribute="top" secondItem="Sdj-Vv-FKk" secondAttribute="bottom" id="OXZ-h4-zuK"/>
                             <constraint firstItem="Sdj-Vv-FKk" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="QVI-cA-qyn"/>
-                            <constraint firstItem="Sdj-Vv-FKk" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="gZl-dA-VDT"/>
+                            <constraint firstItem="pvc-ff-9SI" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Xso-O2-g7z"/>
                             <constraint firstItem="Sdj-Vv-FKk" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="loo-ud-cjR"/>
                             <constraint firstItem="Sdj-Vv-FKk" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="pUi-4K-Ebh"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Greatest App" id="52l-oK-phs">
-                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="TBE-Cn-tqm">
-                            <connections>
-                                <segue destination="Fjh-qn-Lny" kind="show" id="5sf-xn-7hS"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="camera" id="TBE-Cn-tqm"/>
                     </navigationItem>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="collectionView" destination="Sdj-Vv-FKk" id="drh-aU-CHz"/>
                     </connections>
@@ -92,7 +121,7 @@
         <!--Navigation Controller-->
         <scene sceneID="yT4-XO-f0s">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="cAa-x3-O8h" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Navigation" automaticallyAdjustsScrollViewInsets="NO" id="cAa-x3-O8h" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="TQB-GQ-pLd">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -109,6 +138,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icons8-camcorder_pro" width="24" height="24"/>
+        <image name="icons8-compact_camera" width="32" height="32"/>
         <image name="icons8-image" width="40" height="40"/>
     </resources>
 </document>

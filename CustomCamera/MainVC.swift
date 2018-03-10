@@ -21,8 +21,11 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         collectionView.delegate = self
         collectionView.dataSource = self
     }
-
     
+    override func viewWillAppear(_ animated: Bool) {
+        // Hide the navigation bar on the this view controller
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         requestAuthorization()
@@ -72,7 +75,10 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath) as! PhotoCVC
         let asset = images[indexPath.row]
-                
+        cell.videoImageView.isHidden = true
+        if asset.mediaType == .video {
+            cell.videoImageView.isHidden = false
+        }
         let manager = PHImageManager.default()
         if cell.tag != 0 {
             manager.cancelImageRequest(PHImageRequestID(cell.tag))
@@ -102,7 +108,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         var size : CGFloat
         switch UIDevice.current.orientation{
         case .portrait:
-            size = collectionView.frame.width / 5 - 1
+            size = collectionView.frame.width / 3 - 1
         case .landscapeLeft:
             size = collectionView.frame.width / 6 - 1
         case .landscapeRight:
