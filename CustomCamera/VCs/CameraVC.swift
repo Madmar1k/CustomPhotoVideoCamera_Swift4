@@ -21,6 +21,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
     @IBOutlet weak var indicatorView: UIActivityIndicatorView!
     @IBOutlet weak var takenImage: UIImageView!
     @IBOutlet weak var takePhotoButton: UIButton!
+    @IBOutlet weak var flashButton: UIButton!
     
     let captureSession = AVCaptureSession()
     var previewLayer: AVCaptureVideoPreviewLayer?
@@ -38,6 +39,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
     let screen = UIScreen.main.bounds
     var screenWidth : CGFloat = 0
     var screenHeight : CGFloat = 0
+    var isFlashlightOn = false
     
     var imagePicker: UIImagePickerController!
     
@@ -327,6 +329,8 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
         setDeviceOrientation()
         captureSession.addOutput(self.movieFileOutput)
     }
+    
+    //MARK: - Check access
     fileprivate func checkCameraAccess() {
         var isCameraAuthStatusIsAuthorized = (AVCaptureDevice.authorizationStatus(for: AVMediaType.video) == AVAuthorizationStatus.authorized)
         var isMicAuthStatusIsAuthorized = (AVCaptureDevice.authorizationStatus(for: AVMediaType.audio) == AVAuthorizationStatus.authorized)
@@ -394,6 +398,8 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
             present(alert, animated: true, completion: nil)
         }
     }
+    
+    //MARK: - Camera options
     fileprivate func setDeviceOrientation() {
         if let connection = previewLayer?.connection {
             if connection.isVideoOrientationSupported {
@@ -434,8 +440,43 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
         captureSession.commitConfiguration()
     }
     
+    //MARK: - Toggle flashlight
+    func toggleTorch(on: Bool) {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video)
+            else {return}
+        
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                
+                if on == true {
+                    device.torchMode = .on
+                } else {
+                    device.torchMode = .off
+                }
+                
+                device.unlockForConfiguration()
+            } catch {
+                print("Torch could not be used")
+            }
+        } else {
+            print("Torch is not available")
+        }
+    }
     
     //MARK: - IBActions
+    
+    @IBAction func toggleFlash(_ sender: UIButton) {
+        isFlashlightOn = !isFlashlightOn
+        toggleTorch(on: isFlashlightOn)
+        if isFlashlightOn {
+            sender.setImage(#imageLiteral(resourceName: "icons8-flash_on"), for: .normal)
+        } else {
+            sender.setImage(#imageLiteral(resourceName: "icons8-flash_off"), for: .normal)
+        }
+        
+    }
+    
     @IBAction func didTakePhoto(_ sender: Any) {
         if takePhoto {
             takePhoto = false
