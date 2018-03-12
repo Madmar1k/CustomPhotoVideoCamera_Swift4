@@ -545,7 +545,9 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
     }
     @IBAction func closeButtonPressed(_ sender: UIButton) {
         stopCaptureTimer()
-        dismiss(animated: true, completion: nil)
+        if let destinationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainVC") as? MainVC {
+            self.present(destinationVC, animated: false, completion: nil)
+        }
     }
     
     
