@@ -31,7 +31,6 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
     let videoMaxDuration = 30
     var capturePrgsTimer: Timer?
     var outputFileLocation: URL?
-    var videoClipsDevicePosition = [AVCaptureDevice.Position]()
     var videoClipsPath = [URL]()
     var videoClipsDuration = [Double]()
     var isStopButtonPressed = true
@@ -155,14 +154,6 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
     
     // MARK: - AVFondation Delegate & DataSource methods
     
-    func capture(_ captureOutput: AVCaptureFileOutput!, didStartRecordingToOutputFileAt fileURL: URL!, fromConnections connections: [Any]!) {
-        for input in captureSession.inputs {
-            let captureDeviceInput = input as! AVCaptureDeviceInput
-            if captureDeviceInput.device.hasMediaType(AVMediaType.video) {
-                videoClipsDevicePosition.append(captureDeviceInput.device.position)
-            }
-        }
-    }
     
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
         videoClipsPath.append(outputFileURL)
@@ -214,17 +205,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
         
         videoTrack!.preferredTransform = (videoTrack?.preferredTransform.rotated(by: .pi / 2))!
         
-        var needMirroring = true
-        for position in videoClipsDevicePosition {
-            if position == .back {
-                needMirroring = false
-                break
-            }
-        }
         
-        if needMirroring {
-            videoTrack!.preferredTransform = videoTrack!.preferredTransform.scaledBy(x: 1, y: -1)
-        }
         
         let url = URL(fileURLWithPath: NSTemporaryDirectory().appending("video").appending(".mov"))
         let exporter = AVAssetExportSession(asset: composition, presetName: AVAssetExportPresetHighestQuality)
@@ -545,7 +526,6 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
         else {
             FileManager.default.clearTmpDirectory()
             videoClipsPath.removeAll()
-            videoClipsDevicePosition.removeAll()
             videoClipsDuration.removeAll()
             movieFileOutput.maxRecordedDuration = maxRecordDuration()
             movieFileOutput.startRecording(to: URL(fileURLWithPath: videoFileLocation()), recordingDelegate: self)
