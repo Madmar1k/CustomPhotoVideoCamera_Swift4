@@ -84,7 +84,7 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
             manager.cancelImageRequest(PHImageRequestID(cell.tag))
         }
         cell.tag = Int(manager.requestImage(for: asset,
-                                            targetSize: CGSize(width: 100.0, height: 100.0),
+                                            targetSize: CGSize(width: 750.0, height: 750.0),
                                             contentMode: .aspectFill,
                                             options: nil) { (result, _) in
                                                 cell.photoImageView?.image = result

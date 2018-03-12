@@ -20,8 +20,6 @@ class PhotoVC: UIViewController {
         if let availableImage = takenPhoto {
             imageView.image = availableImage
         }
-        
-        
     }
     
     
