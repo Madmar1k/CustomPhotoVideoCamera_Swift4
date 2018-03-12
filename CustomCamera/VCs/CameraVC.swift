@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
+class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestureRecognizerDelegate
 
 {
     
@@ -40,6 +40,9 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
     var screenWidth : CGFloat = 0
     var screenHeight : CGFloat = 0
     var isFlashlightOn = false
+    let minimumZoom: CGFloat = 1.0
+    let maximumZoom: CGFloat = 3.0
+    var lastZoomFactor: CGFloat = 1.0
     
     var imagePicker: UIImagePickerController!
     
@@ -55,6 +58,10 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
         
         screenWidth = screen.width
         screenHeight = screen.height
+        
+        let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(CameraVC.pinch(_:)))
+        pinchGestureRecognizer.delegate = self
+        cameraView.addGestureRecognizer(pinchGestureRecognizer)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -312,7 +319,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
         }
         
         captureSession.sessionPreset = AVCaptureSession.Preset.high
-        self.captureSession.addInput(self.frontCaptureDeviceInput)
+        self.captureSession.addInput(self.backCaptureDeviceInput)
         if let audioInput = AVCaptureDevice.default(for: AVMediaType.audio) {
             do {
                 
@@ -457,16 +464,60 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
                 
                 device.unlockForConfiguration()
             } catch {
-                print("Torch could not be used")
+                print(error.localizedDescription)
             }
         } else {
             print("Torch is not available")
         }
     }
     
-    //MARK: - IBActions
+    //MARK: - Zoom pinch
+    @objc func pinch(_ pinch: UIPinchGestureRecognizer) {
+        guard let device = AVCaptureDevice.default(for: AVMediaType.video)
+            else {return}
+        
+        // Return zoom value between minimum and maximum zoom values
+        func minMaxZoom(_ factor: CGFloat) -> CGFloat {
+            return min(min(max(factor, minimumZoom), maximumZoom), device.activeFormat.videoMaxZoomFactor)
+        }
+        func update(scale factor: CGFloat) {
+            do {
+                try device.lockForConfiguration()
+                defer {
+                    device.unlockForConfiguration()
+                }
+                device.videoZoomFactor = factor
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+        
+        let newScaleFactor = minMaxZoom(pinch.scale * lastZoomFactor)
+        
+        switch pinch.state {
+        case .began:
+            fallthrough
+        case .changed:
+            update(scale: newScaleFactor)
+        case .ended:
+            lastZoomFactor = minMaxZoom(newScaleFactor)
+            update(scale: lastZoomFactor)
+        default:
+            break
+        }
+        
+    }
     
+    //MARK: - IBActions
     @IBAction func toggleFlash(_ sender: UIButton) {
+        //do nothing if front camera enabled
+        if captureSession.inputs.contains(where: { (input) -> Bool in
+            let input = input as! AVCaptureDeviceInput
+            return input == frontCaptureDeviceInput
+        }) {
+            return
+        }
+        
         isFlashlightOn = !isFlashlightOn
         toggleTorch(on: isFlashlightOn)
         if isFlashlightOn {
@@ -474,7 +525,6 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
         } else {
             sender.setImage(#imageLiteral(resourceName: "icons8-flash_off"), for: .normal)
         }
-        
     }
     
     @IBAction func didTakePhoto(_ sender: Any) {
@@ -484,6 +534,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate
             takePhoto = true
         }
     }
+    
     @IBAction func shootButtonPressed(_ sender: UIButton) {
         isStopButtonPressed = !isStopButtonPressed
         if isStopButtonPressed {
