@@ -119,6 +119,26 @@ class MainVC: UIViewController, UICollectionViewDelegate, UICollectionViewDataSo
         return CGSize(width: size, height: size)
     }
     
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! PhotoCVC
+        
+        if let destinationVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PhotoVC") as? PhotoVC {
+            let image = cell.photoImageView.image
+            destinationVC.takenPhoto = image
+            self.present(destinationVC, animated: false, completion: nil)
+        }
+    }
+    
+    
+    // Uncomment this method to specify if the specified item should be highlighted during tracking
+    func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
     /*
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

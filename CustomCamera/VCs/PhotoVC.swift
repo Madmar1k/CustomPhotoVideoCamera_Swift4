@@ -16,7 +16,7 @@ class PhotoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        imageView.contentMode = .scaleAspectFit
         if let availableImage = takenPhoto {
             imageView.image = availableImage
         }
