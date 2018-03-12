@@ -509,10 +509,9 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
     }
     
     @IBAction func didTakePhoto(_ sender: Any) {
-        if takePhoto {
-            takePhoto = false
-        } else {
-            takePhoto = true
+        stopCaptureTimer()
+        if let destinationVC = UIStoryboard(name: "PhotoCameraVC", bundle: nil).instantiateViewController(withIdentifier: "PhotoCameraVC") as? PhotoCameraVC {
+            self.present(destinationVC, animated: false, completion: nil)
         }
     }
     

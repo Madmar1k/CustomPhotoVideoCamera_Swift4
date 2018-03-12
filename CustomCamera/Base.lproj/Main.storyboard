@@ -118,6 +118,48 @@
             </objects>
             <point key="canvasLocation" x="1146" y="78"/>
         </scene>
+        <!--PhotoVC-->
+        <scene sceneID="7QG-4u-q2r">
+            <objects>
+                <viewController storyboardIdentifier="PhotoVC" id="AM0-da-MTV" customClass="PhotoVC" customModule="CustomCamera" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nh7-7s-CBY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vas-S9-ymq">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jNK-Nx-L12">
+                                <rect key="frame" x="335" y="20" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="24" id="88w-LD-lEK"/>
+                                    <constraint firstAttribute="height" constant="24" id="cYU-TL-Zkm"/>
+                                </constraints>
+                                <state key="normal" image="icons8-delete_sign"/>
+                                <connections>
+                                    <action selector="goBack:" destination="AM0-da-MTV" eventType="touchUpInside" id="XbX-pE-a61"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5zm-c9-e3A" firstAttribute="trailing" secondItem="jNK-Nx-L12" secondAttribute="trailing" constant="16" id="0yT-xL-rdI"/>
+                            <constraint firstItem="vas-S9-ymq" firstAttribute="leading" secondItem="5zm-c9-e3A" secondAttribute="leading" id="FDo-yu-sp8"/>
+                            <constraint firstItem="vas-S9-ymq" firstAttribute="top" secondItem="nh7-7s-CBY" secondAttribute="top" id="Lu5-4H-2WF"/>
+                            <constraint firstItem="vas-S9-ymq" firstAttribute="trailing" secondItem="5zm-c9-e3A" secondAttribute="trailing" id="S8u-QM-aV8"/>
+                            <constraint firstItem="jNK-Nx-L12" firstAttribute="top" secondItem="5zm-c9-e3A" secondAttribute="top" id="h4o-tn-HS7"/>
+                            <constraint firstItem="vas-S9-ymq" firstAttribute="bottom" secondItem="5zm-c9-e3A" secondAttribute="bottom" id="hgN-Lj-OCN"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="5zm-c9-e3A"/>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="vas-S9-ymq" id="AgS-DU-IC1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FYJ-sO-2qV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1620" y="78.710644677661179"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="yT4-XO-f0s">
             <objects>
@@ -140,6 +182,7 @@
     <resources>
         <image name="icons8-camcorder_pro" width="24" height="24"/>
         <image name="icons8-compact_camera" width="32" height="32"/>
+        <image name="icons8-delete_sign" width="24" height="24"/>
         <image name="icons8-image" width="40" height="40"/>
     </resources>
 </document>

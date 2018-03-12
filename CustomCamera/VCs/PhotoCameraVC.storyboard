@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Photo CameraVC-->
+        <scene sceneID="ozj-E1-n9h">
+            <objects>
+                <viewController storyboardIdentifier="PhotoCameraVC" id="5Z7-Jr-9lK" customClass="PhotoCameraVC" customModule="CustomCamera" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ctK-qA-Gxc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jEe-4Z-8uF">
+                                <rect key="frame" x="171" y="617" width="32" height="30"/>
+                                <state key="normal" title="Take"/>
+                                <connections>
+                                    <action selector="takePhoto:" destination="5Z7-Jr-9lK" eventType="touchUpInside" id="Z5j-Yk-Hmd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dQP-wL-MXn">
+                                <rect key="frame" x="341" y="22" width="26" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="26" id="n43-i8-25z"/>
+                                    <constraint firstAttribute="width" constant="26" id="sea-O8-hki"/>
+                                </constraints>
+                                <state key="normal" image="icons8-cancel"/>
+                                <connections>
+                                    <action selector="dismiss:" destination="5Z7-Jr-9lK" eventType="touchUpInside" id="qPz-gG-L1u"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="JYi-z8-U3u" firstAttribute="trailing" secondItem="dQP-wL-MXn" secondAttribute="trailing" constant="8" id="YBe-eu-g2g"/>
+                            <constraint firstItem="JYi-z8-U3u" firstAttribute="bottom" secondItem="jEe-4Z-8uF" secondAttribute="bottom" constant="20" id="f9o-Mj-JcH"/>
+                            <constraint firstItem="dQP-wL-MXn" firstAttribute="top" secondItem="JYi-z8-U3u" secondAttribute="top" constant="2" id="n64-vb-qLR"/>
+                            <constraint firstItem="jEe-4Z-8uF" firstAttribute="centerX" secondItem="JYi-z8-U3u" secondAttribute="centerX" id="tLS-9K-vWb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="JYi-z8-U3u"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VyF-r2-XgQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-193" y="255"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="icons8-cancel" width="26" height="26"/>
+    </resources>
+</document>
