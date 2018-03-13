@@ -43,10 +43,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
     let maximumZoom: CGFloat = 3.0
     var lastZoomFactor: CGFloat = 1.0
     var photoOutput = AVCapturePhotoOutput()
-    
-    var imagePicker: UIImagePickerController!
-    
-    var takePhoto = false
+    var actionTimer: Timer?
     
     //MARK: - Overriding methods
     override func viewDidLoad() {
@@ -64,12 +61,14 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
         pinchGestureRecognizer.delegate = self
         cameraView.addGestureRecognizer(pinchGestureRecognizer)
         
+        /*
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CameraVC.tapped(sender:)))
         tapGesture.numberOfTapsRequired = 1
         shootButton.addGestureRecognizer(tapGesture)
         
         let longPress = UILongPressGestureRecognizer(target: self, action: #selector(CameraVC.longPressed(sender:)))
         shootButton.addGestureRecognizer(longPress)
+         */
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -268,7 +267,6 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
             recBtnConfigure(type: "minimalDelayReached")
         } else {
             recBtnInteraction(isEnabled: false)
-            takePhoto = false
         }
         progressView.progress += 0.00017
     }
@@ -499,18 +497,48 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
         
     }
     
+    //MARK: - Shoot action
+    func shootButtonPressed() {
+        isStopButtonPressed = !isStopButtonPressed
+        if isStopButtonPressed {
+            stopCaptureTimer()
+            recBtnInteraction(isEnabled: false)
+            movieFileOutput.stopRecording()
+        }
+        else {
+            FileManager.default.clearTmpDirectory()
+            videoClipsPath.removeAll()
+            videoClipsDuration.removeAll()
+            movieFileOutput.maxRecordedDuration = maxRecordDuration()
+            movieFileOutput.startRecording(to: URL(fileURLWithPath: videoFileLocation()), recordingDelegate: self)
+            startCaptureTimer()
+            updateRecordButtonTitle()
+        }
+    }
+    
     //MARK: - IBActions
     
-    @IBAction func shootCancel(_ sender: UIButton) {
+    @IBAction func shootDown(_ sender: UIButton) {
+        actionTimer = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false, block: { (timer) in
+            self.shootButtonPressed()
+        })
     }
-    @IBAction func tapped(sender: UITapGestureRecognizer) {
-        print("TAPPED!!!")
+    @IBAction func shootTouchUpInside(_ sender: UIButton) {
+        actionTimer?.invalidate()
+        actionTimer = nil
+        self.didTakePhoto(sender)
+    }
+    @IBAction func shootTouchUpOutside(_ sender: UIButton) {
+        actionTimer?.invalidate()
+        actionTimer = nil
+        self.shootButtonPressed()
+    }
+    @IBAction func shootTouchCancel(_ sender: UIButton) {
+        actionTimer?.invalidate()
+        actionTimer = nil
+        self.shootButtonPressed()
     }
     
-    @IBAction func longPressed(sender: UILongPressGestureRecognizer) {
-        print("LONG PRESSED!!!")
-        
-    }
     
     @IBAction func toggleFlash(_ sender: UIButton) {
         //do nothing if front camera enabled
@@ -531,10 +559,6 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
     }
     
     @IBAction func didTakePhoto(_ sender: Any) {
-//        stopCaptureTimer()
-//        if let destinationVC = UIStoryboard(name: "PhotoCameraVC", bundle: nil).instantiateViewController(withIdentifier: "PhotoCameraVC") as? PhotoCameraVC {
-//            self.present(destinationVC, animated: false, completion: nil)
-//        }
         let settings = AVCapturePhotoSettings()
         let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
         let previewFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
@@ -544,23 +568,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
         self.photoOutput.capturePhoto(with: settings, delegate: self)
     }
     
-    @IBAction func shootButtonPressed(_ sender: UIButton) {
-        isStopButtonPressed = !isStopButtonPressed
-        if isStopButtonPressed {
-            stopCaptureTimer()
-            recBtnInteraction(isEnabled: false)
-            movieFileOutput.stopRecording()
-        }
-        else {
-            FileManager.default.clearTmpDirectory()
-            videoClipsPath.removeAll()
-            videoClipsDuration.removeAll()
-            movieFileOutput.maxRecordedDuration = maxRecordDuration()
-            movieFileOutput.startRecording(to: URL(fileURLWithPath: videoFileLocation()), recordingDelegate: self)
-            startCaptureTimer()
-            updateRecordButtonTitle()
-        }
-    }
+    
     
     @IBAction func toggleButtonPressed(_ sender: UIButton) {
         toggleButton.isUserInteractionEnabled = false
@@ -597,6 +605,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
     }
     
 }
+/*
 //MARK: - Photo capture
 extension CameraVC: AVCaptureVideoDataOutputSampleBufferDelegate {
     func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
@@ -628,6 +637,7 @@ extension CameraVC: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
 }
+ */
 extension CameraVC: AVCapturePhotoCaptureDelegate {
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
         if let error = error {

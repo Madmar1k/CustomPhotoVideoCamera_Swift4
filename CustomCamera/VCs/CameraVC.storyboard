@@ -69,8 +69,10 @@
                                 <rect key="frame" x="182" y="665" width="50" height="50"/>
                                 <state key="normal" image="icons8-record"/>
                                 <connections>
-                                    <action selector="shootButtonPressed:" destination="UYs-tC-Muv" eventType="touchUpInside" id="Yym-8Q-6tD"/>
-                                    <action selector="shootCancel:" destination="UYs-tC-Muv" eventType="touchCancel" id="aaa-h3-vMG"/>
+                                    <action selector="shootDown:" destination="UYs-tC-Muv" eventType="touchDown" id="ntG-7F-620"/>
+                                    <action selector="shootTouchCancel:" destination="UYs-tC-Muv" eventType="touchCancel" id="wmy-v3-VAd"/>
+                                    <action selector="shootTouchUpInside:" destination="UYs-tC-Muv" eventType="touchUpInside" id="KQa-8T-hEm"/>
+                                    <action selector="shootTouchUpOutside:" destination="UYs-tC-Muv" eventType="touchUpOutside" id="P91-ai-o4v"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNe-Zu-JIr">
