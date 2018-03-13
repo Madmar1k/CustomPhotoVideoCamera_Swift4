@@ -84,7 +84,7 @@ class PreviewVC: UIViewController {
         if player.rate > 0 {
             player.pause()
             playerStatusImg.image = #imageLiteral(resourceName: "icons8-pause")
-            
+            playButton.setImage(#imageLiteral(resourceName: "icons8-play-1"), for: .normal)
             UIView.animate(withDuration: 0.2, animations: {
                 self.playerStatusImg.alpha = 1.0
             }, completion: { finished in
@@ -96,7 +96,7 @@ class PreviewVC: UIViewController {
         else {
             player.play()
             playerStatusImg.image = #imageLiteral(resourceName: "icons8-play")
-            
+            playButton.setImage(#imageLiteral(resourceName: "icons8-pause-1"), for: .normal)
             UIView.animate(withDuration: 0.2, animations: {
                 self.playerStatusImg.alpha = 1.0
             }, completion: {  finished in

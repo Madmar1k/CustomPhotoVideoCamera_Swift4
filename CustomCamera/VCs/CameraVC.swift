@@ -42,6 +42,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
     let minimumZoom: CGFloat = 1.0
     let maximumZoom: CGFloat = 3.0
     var lastZoomFactor: CGFloat = 1.0
+    var photoOutput = AVCapturePhotoOutput()
     
     var imagePicker: UIImagePickerController!
     
@@ -316,6 +317,7 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
         self.cameraView.layer.addSublayer(self.previewLayer!)
         setDeviceOrientation()
         captureSession.addOutput(self.movieFileOutput)
+        captureSession.addOutput(self.photoOutput)
     }
     
     //MARK: - Check access
@@ -509,10 +511,17 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
     }
     
     @IBAction func didTakePhoto(_ sender: Any) {
-        stopCaptureTimer()
-        if let destinationVC = UIStoryboard(name: "PhotoCameraVC", bundle: nil).instantiateViewController(withIdentifier: "PhotoCameraVC") as? PhotoCameraVC {
-            self.present(destinationVC, animated: false, completion: nil)
-        }
+//        stopCaptureTimer()
+//        if let destinationVC = UIStoryboard(name: "PhotoCameraVC", bundle: nil).instantiateViewController(withIdentifier: "PhotoCameraVC") as? PhotoCameraVC {
+//            self.present(destinationVC, animated: false, completion: nil)
+//        }
+        let settings = AVCapturePhotoSettings()
+        let previewPixelType = settings.availablePreviewPhotoPixelFormatTypes.first!
+        let previewFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewPixelType,
+                             kCVPixelBufferWidthKey as String: 300,
+                             kCVPixelBufferHeightKey as String: 300]
+        settings.previewPhotoFormat = previewFormat
+        self.photoOutput.capturePhoto(with: settings, delegate: self)
     }
     
     @IBAction func shootButtonPressed(_ sender: UIButton) {
@@ -599,4 +608,42 @@ extension CameraVC: AVCaptureVideoDataOutputSampleBufferDelegate {
         }
     }
 }
+extension CameraVC: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+        if let error = error {
+            print(error.localizedDescription)
+            return
+        }
+        
+        if let sampleBuffer = photoSampleBuffer, let previewBuffer = previewPhotoSampleBuffer, let dataImage = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: sampleBuffer, previewPhotoSampleBuffer: previewBuffer) {
+            let image = UIImage(data: dataImage)!
+            CustomPhotoAlbum.sharedInstance.save(image: image)
+            self.takenImage.image = image
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

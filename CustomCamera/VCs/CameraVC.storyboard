@@ -54,13 +54,13 @@
                                     <constraint firstAttribute="width" constant="44" id="pT0-VM-fVP"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQC-3q-XEY">
-                                <rect key="frame" x="171" y="591" width="72" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zQC-3q-XEY">
+                                <rect key="frame" x="192" y="591" width="30" height="30"/>
                                 <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="7gE-ex-oCv"/>
                                     <constraint firstAttribute="height" constant="30" id="FhV-Js-diH"/>
-                                    <constraint firstAttribute="width" constant="72" id="OQv-lW-ZE4"/>
                                 </constraints>
-                                <state key="normal" title="TakePhoto"/>
+                                <state key="normal" image="icons8-camera"/>
                                 <connections>
                                     <action selector="didTakePhoto:" destination="UYs-tC-Muv" eventType="touchUpInside" id="cHo-ga-Gb5"/>
                                 </connections>
@@ -72,9 +72,13 @@
                                     <action selector="shootButtonPressed:" destination="UYs-tC-Muv" eventType="touchUpInside" id="Yym-8Q-6tD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNe-Zu-JIr">
-                                <rect key="frame" x="347" y="686" width="47" height="30"/>
-                                <state key="normal" title="Toggle"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNe-Zu-JIr">
+                                <rect key="frame" x="354" y="676" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="kYq-Sv-7lk"/>
+                                    <constraint firstAttribute="width" constant="40" id="w7K-Ic-ERv"/>
+                                </constraints>
+                                <state key="normal" image="icons8-switch_camera"/>
                                 <connections>
                                     <action selector="toggleButtonPressed:" destination="UYs-tC-Muv" eventType="touchUpInside" id="TZa-5G-kxP"/>
                                 </connections>
@@ -143,9 +147,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="icons8-camera" width="120" height="120"/>
         <image name="icons8-cancel" width="26" height="26"/>
         <image name="icons8-flash_off" width="32" height="32"/>
         <image name="icons8-image" width="40" height="40"/>
         <image name="icons8-record" width="50" height="50"/>
+        <image name="icons8-switch_camera" width="40" height="40"/>
     </resources>
 </document>

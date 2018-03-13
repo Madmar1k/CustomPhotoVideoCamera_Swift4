@@ -27,25 +27,25 @@
                                 <rect key="frame" x="16" y="48" width="343" height="2"/>
                             </progressView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="CaH-8g-Euo">
-                                <rect key="frame" x="20" y="617" width="335" height="30"/>
+                                <rect key="frame" x="20" y="607" width="335" height="40"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyd-WY-bHM">
-                                        <rect key="frame" x="0.0" y="0.0" width="34" height="30"/>
-                                        <state key="normal" title="Save"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gyd-WY-bHM">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <state key="normal" image="icons8-save"/>
                                         <connections>
                                             <action selector="saveAction" destination="oza-ce-Oo6" eventType="touchUpInside" id="wzd-UW-Xcg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhX-LB-K4P">
-                                        <rect key="frame" x="142" y="0.0" width="30" height="30"/>
-                                        <state key="normal" title="Play"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FhX-LB-K4P">
+                                        <rect key="frame" x="147.5" y="0.0" width="40" height="40"/>
+                                        <state key="normal" image="icons8-play-1"/>
                                         <connections>
                                             <action selector="playAction" destination="oza-ce-Oo6" eventType="touchUpInside" id="oja-R4-9qR"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGF-SH-Reg">
-                                        <rect key="frame" x="280" y="0.0" width="55" height="30"/>
-                                        <state key="normal" title="Remove"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iGF-SH-Reg">
+                                        <rect key="frame" x="295" y="0.0" width="40" height="40"/>
+                                        <state key="normal" image="icons8-trash"/>
                                     </button>
                                 </subviews>
                             </stackView>
@@ -104,5 +104,8 @@
     </scenes>
     <resources>
         <image name="icons8-cancel" width="26" height="26"/>
+        <image name="icons8-play-1" width="40" height="40"/>
+        <image name="icons8-save" width="40" height="40"/>
+        <image name="icons8-trash" width="40" height="40"/>
     </resources>
 </document>
