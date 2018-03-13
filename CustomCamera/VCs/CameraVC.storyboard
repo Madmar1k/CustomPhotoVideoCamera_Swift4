@@ -70,6 +70,7 @@
                                 <state key="normal" image="icons8-record"/>
                                 <connections>
                                     <action selector="shootButtonPressed:" destination="UYs-tC-Muv" eventType="touchUpInside" id="Yym-8Q-6tD"/>
+                                    <action selector="shootCancel:" destination="UYs-tC-Muv" eventType="touchCancel" id="aaa-h3-vMG"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xNe-Zu-JIr">

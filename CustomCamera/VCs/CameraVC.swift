@@ -59,9 +59,17 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
         screenWidth = screen.width
         screenHeight = screen.height
         
+        //add gestures
         let pinchGestureRecognizer = UIPinchGestureRecognizer(target: self, action: #selector(CameraVC.pinch(_:)))
         pinchGestureRecognizer.delegate = self
         cameraView.addGestureRecognizer(pinchGestureRecognizer)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(CameraVC.tapped(sender:)))
+        tapGesture.numberOfTapsRequired = 1
+        shootButton.addGestureRecognizer(tapGesture)
+        
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(CameraVC.longPressed(sender:)))
+        shootButton.addGestureRecognizer(longPress)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -492,6 +500,18 @@ class CameraVC: UIViewController, AVCaptureFileOutputRecordingDelegate, UIGestur
     }
     
     //MARK: - IBActions
+    
+    @IBAction func shootCancel(_ sender: UIButton) {
+    }
+    @IBAction func tapped(sender: UITapGestureRecognizer) {
+        print("TAPPED!!!")
+    }
+    
+    @IBAction func longPressed(sender: UILongPressGestureRecognizer) {
+        print("LONG PRESSED!!!")
+        
+    }
+    
     @IBAction func toggleFlash(_ sender: UIButton) {
         //do nothing if front camera enabled
         if captureSession.inputs.contains(where: { (input) -> Bool in
